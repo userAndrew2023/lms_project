@@ -287,43 +287,71 @@ class Kanban(QMainWindow):
         self.CIn.clicked.connect(self.completeProgressL)
 
     def todoProgressL(self):
-        item = self.listWidget.currentItem()
-        self.listWidget.takeItem(self.listWidget.row(item))
-        self.listWidget_2.addItem(item.text())
-        TaskService().updateByTitle(item.text(), "PROGRESS")
+        try:
+            item = self.listWidget.currentItem()
+            self.listWidget.takeItem(self.listWidget.row(item))
+            self.listWidget_2.addItem(item.text())
+            TaskService().updateByTitle(item.text(), "PROGRESS")
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def progressTodoL(self):
-        item = self.listWidget_2.currentItem()
-        self.listWidget_2.takeItem(self.listWidget_2.row(item))
-        self.listWidget.addItem(item.text())
-        TaskService().updateByTitle(item.text(), "TODO")
+        try:
+            item = self.listWidget_2.currentItem()
+            self.listWidget_2.takeItem(self.listWidget_2.row(item))
+            self.listWidget.addItem(item.text())
+            TaskService().updateByTitle(item.text(), "TODO")
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def progressCompleteL(self):
-        item = self.listWidget_2.currentItem()
-        self.listWidget_2.takeItem(self.listWidget_2.row(item))
-        self.listWidget_3.addItem(item.text())
-        TaskService().updateByTitle(item.text(), "COMPLETE")
+        try:
+            item = self.listWidget_2.currentItem()
+            self.listWidget_2.takeItem(self.listWidget_2.row(item))
+            self.listWidget_3.addItem(item.text())
+            TaskService().updateByTitle(item.text(), "COMPLETE")
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def completeProgressL(self):
-        item = self.listWidget_3.currentItem()
-        self.listWidget_3.takeItem(self.listWidget_3.row(item))
-        self.listWidget_2.addItem(item.text())
-        TaskService().updateByTitle(item.text(), "PROGRESS")
+        try:
+            item = self.listWidget_3.currentItem()
+            self.listWidget_3.takeItem(self.listWidget_3.row(item))
+            self.listWidget_2.addItem(item.text())
+            TaskService().updateByTitle(item.text(), "PROGRESS")
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def deleteL(self):
-        item = self.listWidget.currentItem()
-        self.listWidget.takeItem(self.listWidget.row(item))
-        TaskService().deleteByTitle(item.text())
+        try:
+            item = self.listWidget.currentItem()
+            self.listWidget.takeItem(self.listWidget.row(item))
+            TaskService().deleteByTitle(item.text())
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def delete2L(self):
-        item = self.listWidget_2.currentItem()
-        self.listWidget_2.takeItem(self.listWidget_2.row(item))
-        TaskService().deleteByTitle(item.text())
+        try:
+            item = self.listWidget_2.currentItem()
+            self.listWidget_2.takeItem(self.listWidget_2.row(item))
+            TaskService().deleteByTitle(item.text())
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def delete3L(self):
-        item = self.listWidget_3.currentItem()
-        self.listWidget_3.takeItem(self.listWidget_3.row(item))
-        TaskService().deleteByTitle(item.text())
+        try:
+            item = self.listWidget_3.currentItem()
+            self.listWidget_3.takeItem(self.listWidget_3.row(item))
+            TaskService().deleteByTitle(item.text())
+        except Exception as e:
+            with open("logs.txt", "a+") as f:
+                f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
 
     def addTodoListener(self):
         if len(self.lineEdit.text().strip()) != 0:
@@ -345,12 +373,7 @@ class Kanban(QMainWindow):
 
 
 if __name__ == '__main__':
-    try:
-        app = QApplication(sys.argv)
-        kan = Kanban()
-        kan.show()
-        sys.exit(app.exec_())
-    except Exception as e:
-        with open("logs.txt", "a+") as f:
-            f.write(f"{str(datetime.datetime.now()).split('.')[0]} - {e.__class__}: {e}\n")
-        exit()
+    app = QApplication(sys.argv)
+    kan = Kanban()
+    kan.show()
+    sys.exit(app.exec_())
